@@ -34,7 +34,7 @@ spec:
         command: ["sh", "-c", "until nc -z $DEPENDENCIES; do echo waiting for the NRF; sleep 2; done;"]
       containers:
       - name: upf
-        image: free5gc/upf:v3.4.3
+        image: yathy1040/free5gc:v3.4.3
         imagePullPolicy: Always
         command: [ "/free5gc/config/wrapper.sh" ]
         volumeMounts:

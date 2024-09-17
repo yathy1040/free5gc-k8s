@@ -25,7 +25,7 @@ spec:
           value: pcf-npcf:8000
         command: ["sh", "-c", "until nc -z $DEPENDENCIES; do echo waiting for the SMF; sleep 2; done;"]
       containers:
-      - image: free5gc/udm:v3.4.3
+      - image: yathy1040/free5gc:v3.4.3
         name: udm
         ports:
         - containerPort: 8000

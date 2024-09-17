@@ -1,19 +1,11 @@
 # Build stage for Free5GC
-FROM golang:1.14.4-stretch AS builder
-LABEL maintainer="Niloy Saha <niloysaha.ns@gmail.com> and Yathusan"
-
-# Rename repo after Debian bulls-eye release
-RUN sed -i 's/stable\/updates/stable-security\/updates/' /etc/apt/sources.list \
-    && sed -i s/deb.debian.org/archive.debian.org/g /etc/apt/sources.list \
-    && sed -i 's|security.debian.org|archive.debian.org|g' /etc/apt/sources.list \
-    && sed -i '/stretch-updates/d' /etc/apt/sources.list
-
-
+FROM golang:1.23.1-bullseye AS builder
+LABEL maintainer="Yathusan"
 
 # Install dependencies for building Free5GC
 RUN apt-get update \
     && apt-get -y install gcc cmake autoconf libtool pkg-config libmnl-dev libyaml-dev apt-transport-https ca-certificates \
-    && curl -sL https://deb.nodesource.com/setup_14.x | bash - \
+    && curl -sL https://deb.nodesource.com/setup_20.x | bash - \
     && curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - \
     && echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list \
     && apt-get update \
@@ -22,13 +14,13 @@ RUN apt-get update \
 
 # Get and build Free5GC
 RUN cd $GOPATH/src \
-    && git clone --recursive -b v3.4.3 -j `nproc` https://github.com/free5gc/free5gc.git \
+    && git clone --recursive -j `nproc` https://github.com/yathy1040/free5gc.git \
     && cd free5gc \
     && make all
 
 # Final stage based on Ubuntu 20.04
 FROM ubuntu:20.04
-LABEL maintainer="Niloy Saha <niloysaha.ns@gmail.com> and Yathusan"
+LABEL maintainer="Yathusan"
 LABEL description="Free5GC v3.4.3"
 ENV DEBIAN_FRONTEND=noninteractive
 
@@ -45,7 +37,6 @@ COPY --from=builder /go/src/free5gc/bin/* ./
 COPY --from=builder /go/src/free5gc/webconsole/bin/webconsole ./webui
 COPY --from=builder /go/src/free5gc/webconsole/public ./public
 COPY --from=builder /go/src/free5gc/config/* ./config/
-COPY --from=builder /go/src/free5gc/config/TLS/* ./config/TLS/
 
 VOLUME [ "/free5gc/config"]
 
