@@ -5,7 +5,7 @@ This repository contains the necessary files and resources to deploy and operate
 For more information about Free5GC, please visit the [Free5GC GitHub repository](https://github.com/free5gc/free5gc).
 
 ![Static Badge](https://img.shields.io/badge/stable-v1.0.0-green)
-![Static Badge](https://img.shields.io/badge/free5gc-v3.2.0-green)
+![Static Badge](https://img.shields.io/badge/free5gc-v3.4.3-green)
 ![Static Badge](https://img.shields.io/badge/ueransim-v3.2.6-green)
 ![Static Badge](https://img.shields.io/badge/k8s-v1.28.2-green)
 ![Static Badge](https://img.shields.io/badge/kernel-v5.4.0-green)
