@@ -23,6 +23,7 @@ data:
         name: free5gc # Database name in MongoDB
         url: mongodb://mongodb:27017 # URL of MongoDB
       nrfUri: http://nrf-nnrf:8000 # a valid URI of NRF
+      nrfCertPem: cert/nrf.pem # NRF Certificate
 
     # the kind of log output
     # debugLevel: how detailed to output, value: trace, debug, info, warn, error, fatal, panic
