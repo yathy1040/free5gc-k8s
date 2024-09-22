@@ -7,7 +7,7 @@ metadata:
 data:
   pcfcfg.yaml: |
     info:
-      version: 1.0.1
+      version: 1.0.2
       description: PCF initial local configuration
 
     configuration:
@@ -23,6 +23,7 @@ data:
       timeFormat: 2019-01-02 15:04:05 # time format of this PCF
       defaultBdtRefId: BdtPolicyId-   # BDT Reference ID, indicating transfer policies of background data transfer.
       nrfUri: http://nrf-nnrf:8000  # a valid URI of NRF
+      nrfCertPem: cert/nrf.pem # NRF Certificate
       serviceList:   # the SBI services provided by this PCF, refer to TS 29.507
         - serviceName: npcf-am-policy-control # Npcf_AMPolicyControl service
         - serviceName: npcf-smpolicycontrol   # Npcf_SMPolicyControl service
@@ -41,6 +42,6 @@ data:
     # debugLevel: how detailed to output, value: trace, debug, info, warn, error, fatal, panic
     # ReportCaller: enable the caller report or not, value: true or false
     logger:
-      PCF:
-        debugLevel: info
-        ReportCaller: false
+      enable: true # true or false
+      level: info # how detailed to output, value: trace, debug, info, warn, error, fatal, panic
+      reportCaller: false # enable the caller report or not, value: true or false

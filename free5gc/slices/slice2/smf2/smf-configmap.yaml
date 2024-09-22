@@ -9,7 +9,7 @@ metadata:
 data:
   smfcfg.yaml: |
     info:
-      version: 1.0.2
+      version: 1.0.7
       description: SMF initial local configuration
 
     configuration:
@@ -64,30 +64,19 @@ data:
           - A: gNB
             B: UPF2
       nrfUri: http://nrf-nnrf:8000 # a valid URI of NRF
+      nrfCertPem: cert/nrf.pem # NRF Certificate
 
     # the kind of log output
     # debugLevel: how detailed to output, value: trace, debug, info, warn, error, fatal, panic
     # ReportCaller: enable the caller report or not, value: true or false
     logger:
-      SMF:
-        debugLevel: info
-        ReportCaller: false
-      NAS:
-        debugLevel: info
-        ReportCaller: false
-      NGAP:
-        debugLevel: info
-        ReportCaller: false
-      Aper:
-        debugLevel: info
-        ReportCaller: false
-      PFCP:
-        debugLevel: info
-        ReportCaller: false
+      enable: true # true or false
+      level: info # how detailed to output, value: trace, debug, info, warn, error, fatal, panic
+      reportCaller: false # enable the caller report or not, value: true or false
 
   uerouting.yaml: |
     info:
-      version: 1.0.1
+      version: 1.0.7
       description: Routing information for UE
     ueRoutingInfo: # the list of UE routing information
       UE1: # Group Name
