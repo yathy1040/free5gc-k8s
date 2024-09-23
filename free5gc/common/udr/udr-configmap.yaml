@@ -19,6 +19,7 @@ data:
         tls: # the local path of TLS key
           pem: config/TLS/udr.pem # UDR TLS Certificate
           key: config/TLS/udr.key # UDR TLS Private key
+      dbConnectorType: mongodb
       mongodb:
         name: free5gc # Database name in MongoDB
         url: mongodb://mongodb:27017 # URL of MongoDB
