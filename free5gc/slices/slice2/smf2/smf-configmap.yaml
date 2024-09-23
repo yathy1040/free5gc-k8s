@@ -39,7 +39,12 @@ data:
           mnc: "01" # Mobile Network Code (2 or 3 digits string, digit: 0~9)
       locality: area1 # Name of the location where a set of AMF, SMF and UPFs are located
       pfcp: # the IP address of N4 interface on this SMF (PFCP)
-        addr: 10.10.4.102
+        nodeID: 10.10.4.102 # the Node ID of this SMF
+        listenAddr: 10.10.4.102 # the IP/FQDN of N4 interface on this SMF (PFCP)
+        externalAddr: 10.10.4.102 # the IP/FQDN of N4 interface on this SMF (PFCP)
+        assocFailAlertInterval: 10s
+        assocFailRetryInterval: 30s
+        heartbeatInterval: 10s
       userplaneInformation: # list of userplane information
         upNodes: # information of userplane node (AN or UPF)
           gNB: # the name of the node
@@ -60,11 +65,25 @@ data:
                 endpoints: # the IP address of this N3/N9 interface on this UPF
                   - 10.10.3.2
                 networkInstance: streaming # Data Network Name (DNN)
+                  - internet
         links: # the topology graph of userplane, A and B represent the two nodes of each link
           - A: gNB
             B: UPF2
+        # retransmission timer for pdu session modification command
+      t3591:
+        enable: true # true or false
+        expireTime: 16s # default is 6 seconds
+        maxRetryTimes: 3 # the max number of retransmission
+    # retransmission timer for pdu session release command
+      t3592:
+        enable: true # true or false
+        expireTime: 16s # default is 6 seconds
+        maxRetryTimes: 3 # the max number of retransmission
       nrfUri: http://nrf-nnrf:8000 # a valid URI of NRF
       nrfCertPem: cert/nrf.pem # NRF Certificate
+      urrPeriod: 30 # default usage report period in seconds
+      urrThreshold: 500000 # default usage report threshold in bytes
+      requestedUnit: 1000      
 
     # the kind of log output
     # debugLevel: how detailed to output, value: trace, debug, info, warn, error, fatal, panic
