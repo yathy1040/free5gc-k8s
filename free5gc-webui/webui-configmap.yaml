@@ -14,6 +14,23 @@ data:
       mongodb:
         name: free5gc
         url: mongodb://mongodb:27017
+      nrfUri: http://nrf-nnrf:8000  # a valid URI of NRF
+      webServer:
+        scheme: http
+        ipv4Address: 0.0.0.0
+        port: 5000
+      billingServer:
+        enable: true
+        hostIPv4: 127.0.0.1
+        listenPort: 2121
+        portRange: # passive port range
+          start: 2123
+          end: 2130
+        basePath: /tmp/webconsole
+        port: 2122 # CGF's FTP server port (not used for now)
+        cert:
+          pem: cert/chf.pem
+          key: cert/chf.key
     
     # the kind of log output
     # debugLevel: how detailed to output, value: trace, debug, info, warn, error, fatal, panic

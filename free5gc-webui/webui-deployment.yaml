@@ -39,7 +39,7 @@ spec:
           initialDelaySeconds: 0
           periodSeconds: 1
           timeoutSeconds: 1
-          failureThreshold:  40
+          failureThreshold: 40
           successThreshold: 1
           httpGet:
             port: 5000
