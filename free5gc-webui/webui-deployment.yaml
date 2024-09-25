@@ -22,7 +22,7 @@ spec:
           value: mongodb:27017
         command: ["sh", "-c", "until nc -z $DEPENDENCIES; do echo waiting for the MongoDB; sleep 2; done;"]
       containers:
-      - image: ghcr.io/niloysh/free5gc:v3.2.0
+      - image: yathy1040/free5gc:v3.4.3.1
         imagePullPolicy: Always
         name: webui
         ports:
@@ -39,7 +39,7 @@ spec:
           initialDelaySeconds: 0
           periodSeconds: 1
           timeoutSeconds: 1
-          failureThreshold:  40
+          failureThreshold: 40
           successThreshold: 1
           httpGet:
             port: 5000

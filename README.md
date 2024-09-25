@@ -5,7 +5,7 @@ This repository contains the necessary files and resources to deploy and operate
 For more information about Free5GC, please visit the [Free5GC GitHub repository](https://github.com/free5gc/free5gc).
 
 ![Static Badge](https://img.shields.io/badge/stable-v1.0.0-green)
-![Static Badge](https://img.shields.io/badge/free5gc-v3.2.0-green)
+![Static Badge](https://img.shields.io/badge/free5gc-v3.4.3-green)
 ![Static Badge](https://img.shields.io/badge/ueransim-v3.2.6-green)
 ![Static Badge](https://img.shields.io/badge/k8s-v1.28.2-green)
 ![Static Badge](https://img.shields.io/badge/kernel-v5.4.0-green)
@@ -62,9 +62,12 @@ cd bin
 
 ![NGAP connection success](images/gnb-log.png)
 
-7. Ensure correct UE subscriber information is inserted. You can enter subscription information using the web UI (see [accessing the Free5GC webui](#accessing-the-Free5GC-webui)). Subscriber details can be found in UE config files (e.g., [ue1.yaml](ueransim/ueransim-ue/ue1/ue1.yaml)).
+8. Ensure correct UE subscriber information is inserted. You can enter subscription information using the web UI (see [accessing the Free5GC webui](#accessing-the-Free5GC-webui)). Subscriber details can be found in UE config files (e.g., [ue1.yaml](ueransim/ueransim-ue/ue1/ue1.yaml)).
+Add subscriber details for the slices too (which is detailed in UE config files), ensure you name the first DNN internet (for first UE), for second UE name DNN streaming,
 
-8. Deploy UERANSIM UEs using `ueransim/ueransim-ue/` directory. Once the UE is connected, you should see the following logs:
+#TODO: Clarify instructions to add subscribers
+
+9. Deploy UERANSIM UEs using `ueransim/ueransim-ue/` directory. Once the UE is connected, you should see the following logs:
 
 ![UE connection success](images/ue-log.png)
 
@@ -113,7 +116,7 @@ Some convenience scripts are available in the `bin` folder:
   ./k8s-shell.sh amf free5gc
   ```
 
-- **install-gtp5g.sh**: Use this script to install gtp5g v0.8.2 on nodes where UPF should run.
+- **install-gtp5g.sh**: Use this script to install gtp5g v0.8.10 on nodes where UPF should run.
 
 
 ## License

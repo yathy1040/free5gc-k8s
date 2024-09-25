@@ -20,14 +20,14 @@ RUN apt-get update \
 
 # Get and build Free5GC
 RUN cd $GOPATH/src \
-    && git clone --recursive -b v3.2.0 -j `nproc` https://github.com/free5gc/free5gc.git
+    && git clone --recursive -b v3.4.3 -j `nproc` https://github.com/free5gc/free5gc.git
 
 WORKDIR $GOPATH/src/free5gc
 
 # update .submodules to point to custom SMF source
 RUN sed -i 's#https://github.com/free5gc/smf.git#https://github.com/niloysh/smf.git#g' .gitmodules \
     && git submodule sync --recursive
-RUN cd NFs/smf && git fetch && git checkout v3.2.0-sliceinfo
+RUN cd NFs/smf && git fetch && git checkout v3.4.3-sliceinfo
 
 # update .submodules to point to custom UPF source
 RUN sed -i 's#https://github.com/free5gc/go-upf.git#https://github.com/niloysh/go-upf.git#g' .gitmodules \

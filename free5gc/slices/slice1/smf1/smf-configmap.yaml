@@ -9,7 +9,7 @@ metadata:
 data:
   smfcfg.yaml: |
     info:
-      version: 1.0.2
+      version: 1.0.7
       description: SMF initial local configuration
 
     configuration:
@@ -39,7 +39,12 @@ data:
           mnc: "01" # Mobile Network Code (2 or 3 digits string, digit: 0~9)
       locality: area1 # Name of the location where a set of AMF, SMF and UPFs are located
       pfcp: # the IP address of N4 interface on this SMF (PFCP)
-        addr: 10.10.4.101
+        nodeID: 10.10.4.101 # the Node ID of this SMF
+        listenAddr: 10.10.4.101 # the IP/FQDN of N4 interface on this SMF (PFCP)
+        externalAddr: 10.10.4.101 # the IP/FQDN of N4 interface on this SMF (PFCP)
+        assocFailAlertInterval: 10s
+        assocFailRetryInterval: 30s
+        heartbeatInterval: 10s
       userplaneInformation: # list of userplane information
         upNodes: # information of userplane node (AN or UPF)
           gNB: # the name of the node
@@ -59,35 +64,38 @@ data:
               - interfaceType: N3 # the type of the interface (N3 or N9)
                 endpoints: # the IP address of this N3/N9 interface on this UPF
                   - 10.10.3.1
-                networkInstance: internet # Data Network Name (DNN)
+                networkInstances: # Data Network Name (DNN)
+                  - internet
         links: # the topology graph of userplane, A and B represent the two nodes of each link
           - A: gNB
             B: UPF1
+        # retransmission timer for pdu session modification command
+      t3591:
+        enable: true # true or false
+        expireTime: 16s # default is 6 seconds
+        maxRetryTimes: 3 # the max number of retransmission
+    # retransmission timer for pdu session release command
+      t3592:
+        enable: true # true or false
+        expireTime: 16s # default is 6 seconds
+        maxRetryTimes: 3 # the max number of retransmission
       nrfUri: http://nrf-nnrf:8000 # a valid URI of NRF
+      nrfCertPem: cert/nrf.pem # NRF Certificate
+      urrPeriod: 30 # default usage report period in seconds
+      urrThreshold: 500000 # default usage report threshold in bytes
+      requestedUnit: 1000
 
     # the kind of log output
     # debugLevel: how detailed to output, value: trace, debug, info, warn, error, fatal, panic
     # ReportCaller: enable the caller report or not, value: true or false
     logger:
-      SMF:
-        debugLevel: info
-        ReportCaller: false
-      NAS:
-        debugLevel: info
-        ReportCaller: false
-      NGAP:
-        debugLevel: info
-        ReportCaller: false
-      Aper:
-        debugLevel: info
-        ReportCaller: false
-      PFCP:
-        debugLevel: info
-        ReportCaller: false
+      enable: true # true or false
+      level: info # how detailed to output, value: trace, debug, info, warn, error, fatal, panic
+      reportCaller: false # enable the caller report or not, value: true or false
 
   uerouting.yaml: |
     info:
-      version: 1.0.1
+      version: 1.0.7
       description: Routing information for UE
     ueRoutingInfo: # the list of UE routing information
       UE1: # Group Name
