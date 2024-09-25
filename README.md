@@ -65,7 +65,7 @@ cd bin
 8. Ensure correct UE subscriber information is inserted. You can enter subscription information using the web UI (see [accessing the Free5GC webui](#accessing-the-Free5GC-webui)). Subscriber details can be found in UE config files (e.g., [ue1.yaml](ueransim/ueransim-ue/ue1/ue1.yaml)).
 Add subscriber details for the slices too (which is detailed in UE config files), ensure you name the first DNN internet (for first UE), for second UE name DNN streaming,
 
-# TODO: Clarify instructions to add subscribers
+TODO: Clarify instructions to add subscribers
 
 9. Deploy UERANSIM UEs using `ueransim/ueransim-ue/` directory. Once the UE is connected, you should see the following logs:
 
