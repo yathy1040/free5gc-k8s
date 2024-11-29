@@ -1,11 +1,11 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: upf-configmap
+  name: upf1-configmap
   labels:
     app: free5gc
     nf: upf
-    name: upf
+    name: upf1
 data:
   upfcfg.yaml: |
     version: 1.0.3

@@ -1,24 +1,24 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: free5gc-upf
+  name: free5gc-upf1
   labels:
     app: free5gc
     nf: upf
-    name: upf
+    name: upf1
 spec:
   selector:
     matchLabels:
       app: free5gc
       nf: upf
-      name: upf
+      name: upf1
   replicas: 1
   template:
     metadata:
       labels:
         app: free5gc
         nf: upf
-        name: upf
+        name: upf1
       annotations:
         k8s.v1.cni.cncf.io/networks: '[
           { "name": "n3network", "interface": "n3", "ips": [ "10.10.3.1/24" ] },
@@ -58,7 +58,7 @@ spec:
       volumes:
       - name: upf-volume
         configMap:
-          name: upf-configmap
+          name: upf1-configmap
           items:
           - key: upfcfg.yaml
             path: upfcfg.yaml

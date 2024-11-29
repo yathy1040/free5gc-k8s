@@ -5,11 +5,11 @@ metadata:
   labels:
     app: free5gc
     nf: smf
-    name: smf
+    name: smf1
 spec:
   ports:
     - port: 8000
   selector:
     app: free5gc
     nf: smf
-    name: smf
+    name: smf1
