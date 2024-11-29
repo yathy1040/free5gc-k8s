@@ -1,24 +1,24 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: free5gc-smf
+  name: free5gc-smf1
   labels:
     app: free5gc
     nf: smf
-    name: smf
+    name: smf1
 spec:
   selector:
     matchLabels:
       app: free5gc
       nf: smf
-      name: smf
+      name: smf1
   replicas: 1
   template:
     metadata:
       labels:
         app: free5gc
         nf: smf
-        name: smf
+        name: smf1
       annotations:
         k8s.v1.cni.cncf.io/networks: '[
           { "name": "n4network", "interface": "n4", "ips": [ "10.10.4.101/24" ] }
@@ -63,7 +63,7 @@ spec:
         projected:
           sources:
           - configMap:
-              name: smf-configmap
+              name: smf1-configmap
               items:
               - key: smfcfg.yaml
                 path: smfcfg.yaml

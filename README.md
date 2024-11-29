@@ -2,6 +2,8 @@
 
 This repository contains the necessary files and resources to deploy and operate Free5GC, an open-source 5G core network implementation. It provides Kubernetes manifest files for deploying Free5GC using microservices, and Free5GC WebUI. Additionally, there are manifest files for deploying the MongoDB database and network attachment definitions for Free5GC.
 
+Thanks to Niloy Sama for building this initally,
+
 For more information about Free5GC, please visit the [Free5GC GitHub repository](https://github.com/free5gc/free5gc).
 
 ![Static Badge](https://img.shields.io/badge/stable-v1.0.0-green)
