@@ -2,7 +2,7 @@
 
 This repository contains the necessary files and resources to deploy and operate Free5GC, an open-source 5G core network implementation. It provides Kubernetes manifest files for deploying Free5GC using microservices, and Free5GC WebUI. Additionally, there are manifest files for deploying the MongoDB database and network attachment definitions for Free5GC.
 
-Thanks to Niloy Sama for building this initally,
+Thanks to Niloy Sama for building this initally.
 
 For more information about Free5GC, please visit the [Free5GC GitHub repository](https://github.com/free5gc/free5gc).
 
@@ -27,7 +27,7 @@ The repository is organized as follows:
 
 **Note**: Free5GC recommends kernel version `5.4.0`. It has also been successfully tested on kernel `5.15.0-94`. Using a higher kernel version (e.g, 6.x) may result in [issues with the UPF](https://forum.free5gc.org/t/upf-est-createfar-error-invalid-argument/2111). 
 
-**Note**: The deployment instructions assume a working kubernetes cluster with OVS CNI installed. You can optionally use the [testbed-automator](https://github.com/niloysh/testbed-automator) to prepare the Kubernetes cluster. This includes setting up the K8s cluster, configuring the cluster, installing various Container Network Interfaces (CNIs), configuring OVS bridges, and preparing for the deployment of the 5G Core network.
+**Note**: The deployment instructions assume a working kubernetes cluster with OVS CNI installed. You can optionally use the [testbed-automator](https://github.com/yathy1040/testbed-automator) to prepare the Kubernetes cluster. This includes setting up the K8s cluster, configuring the cluster, installing various Container Network Interfaces (CNIs), configuring OVS bridges, and preparing for the deployment of the 5G Core network.
 
 To deploy Free5GC and its components, follow the deployment steps below:
 
@@ -49,7 +49,7 @@ To deploy Free5GC and its components, follow the deployment steps below:
 
 3. Deploy the network attachment definitions using manifest files in the `networks5g/` directory. This are used for the secondary interfaces of the UPF, SMF, etc.
 
-4. Install the gtp5g kernel module for Free5GC. Use the `install-gtp5g.sh` script to install gtp5g v0.8.2 on nodes where UPF should run. This is a prerequisite for deploying the UPF. 
+4. Install the gtp5g kernel module for Free5GC. Use the `install-gtp5g.sh` script to install gtp5g v0.8.10 on nodes where UPF should run. This is a prerequisite for deploying the UPF. 
 
 ```bash
 cd bin
@@ -64,12 +64,11 @@ cd bin
 
 ![NGAP connection success](images/gnb-log.png)
 
-8. Ensure correct UE subscriber information is inserted. You can enter subscription information using the web UI (see [accessing the Free5GC webui](#accessing-the-Free5GC-webui)). Subscriber details can be found in UE config files (e.g., [ue1.yaml](ueransim/ueransim-ue/ue1/ue1.yaml)).
-Add subscriber details for the slices too (which is detailed in UE config files), ensure you name the first DNN internet (for first UE), for second UE name DNN streaming,
+8. Ensure correct UE subscriber information is inserted. You can enter subscription information using the web UI (see [accessing the Free5GC webui](#accessing-the-Free5GC-webui)). Subscriber details can be found in UE config files (e.g., [ue1.yaml](ueransim/ueransim-ue/ue1/ue1.yaml)). Change the SUPI, PLMN ID, Operator Code Value, Permanent Authentication Name, the SD in the S-NSSAI Config and check to see the data network name is correct (for first UE: internet, for second UE: streaming). Do this with both UEs (as this testbed has two UEs) and both should be added as subscribers.
 
-#TODO: Clarify instructions to add subscribers
+An example is given below (fields to change have red boxes around them): (add screenshot here)
 
-9. Deploy UERANSIM UEs using `ueransim/ueransim-ue/` directory. Once the UE is connected, you should see the following logs:
+10. Deploy UERANSIM UEs using `ueransim/ueransim-ue/` directory. Once the UE is connected, you should see the following logs:
 
 ![UE connection success](images/ue-log.png)
 
@@ -103,7 +102,15 @@ kubectl apply -k <component> -n free5gc
 ```
 
 ### Accessing the Free5GC webui
-1. Subscribers can be added using the Free5GC WebUI. The WebUI is accessible at `http://<node-ip>:30505`. The default username and password are `admin` and `free5gc`, respectively.
+1. Subscribers can be added using the Free5GC WebUI. First, the IP of the Pod WebUI is running on has to be found. This can be done by doing the command below:
+
+```bash
+kubectl get pods -o wide -n free5gc
+```
+
+After so, you should be able to find the Pod IP of the WebUI. (add screenshot in)
+
+The WebUI is accessible at `http://<pod-ip>:5000`. The default username and password are `admin` and `free5gc`, respectively.
 
 ## Convenience Scripts
 Some convenience scripts are available in the `bin` folder:
@@ -126,11 +133,6 @@ Some convenience scripts are available in the `bin` folder:
 This repository is licensed under the [MIT License](LICENSE).
 
 ## Credits
-These manifest files are heavily inspired from [towards5gs-helm](https://github.com/Orange-OpenSource/towards5gs-helm) and the Docker images used are based on [free5gc-compose](https://github.com/free5gc/free5gc-compose).
+These manifest files are heavily inspired from [towards5gs-helm](https://github.com/Orange-OpenSource/towards5gs-helm) and the Docker images used are based on [free5gc-compose](https://github.com/free5gc/free5gc-compose). Credits are also given to Niloy Sama for building the initial testbed whcih was upgraded to create this testbed.
 
-## Citation
-![GitHub](https://img.shields.io/badge/IEEE%20NOMS-2022-green)
 
-If you use the code in this repository in your research work or project, please consider citing the following publication.
-
-> N. Saha, A. James, N. Shahriar, R. Boutaba and A. Saleh. (2022). Demonstrating Network Slice KPI Monitoring in a 5G Testbed. In Proceedings of the IEEE/IFIP Network Operations and Management Symposium (NOMS). Budapest, Hungary, 25 - 29 April, 2022.
