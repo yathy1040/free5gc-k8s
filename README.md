@@ -12,6 +12,12 @@ For more information about Free5GC, please visit the [Free5GC GitHub repository]
 ![Static Badge](https://img.shields.io/badge/k8s-v1.28.2-green)
 ![Static Badge](https://img.shields.io/badge/kernel-v5.4.0-green)
 
+## MSc Research
+
+This testbed supported the MSc thesis **Transformer-Based Intrusion Detection for 5G Core Networks** by Yathusan Thulasinathan. The research used a Kubernetes-deployed Free5GC and UERANSIM environment to collect benign and malicious network traffic and evaluate BERT, DistilBERT, RoBERTa, and ALBERT as intrusion-detection models.
+
+[Read the MSc thesis](research/Transformer-Based-Intrusion-Detection-for-5G-Core-Networks.pdf)
+
 ## Directory Structure
 
 The repository is organized as follows:
@@ -31,7 +37,7 @@ The repository is organized as follows:
 
 To deploy Free5GC and its components, follow the deployment steps below:
 
-1. Set up OVS bridges. On each K8s cluster node, add the OVS bridges: n2br, n3br, and n4br. Connect nodes using these bridges and OVS-based VXLAN tunnels. See [ovs-cni docs](https://github.com/k8snetworkplumbingwg/ovs-cni/blob/main/docs/demo.md#connect-bridges-using-vxlan).
+1. Set up OVS bridges. On each K8s cluster node, add the OVS bridges: n2br, n3br, and n4br. Connect nodes using these bridges and OVS-based VXLAN tunnels. See [ovs-cni docs](https://github.com/k8snetworkingwg/ovs-cni/blob/main/docs/demo.md#connect-bridges-using-vxlan).
 
     <details>
     <summary>Example command for creating VXLAN tunnels</summary>
@@ -133,6 +139,5 @@ Some convenience scripts are available in the `bin` folder:
 This repository is licensed under the [MIT License](LICENSE).
 
 ## Credits
+
 These manifest files are heavily inspired from [towards5gs-helm](https://github.com/Orange-OpenSource/towards5gs-helm) and the Docker images used are based on [free5gc-compose](https://github.com/free5gc/free5gc-compose). Credits are also given to Niloy Sama for building the initial testbed whcih was upgraded to create this testbed.
-
-
