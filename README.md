@@ -16,7 +16,7 @@ For more information about Free5GC, please visit the [Free5GC GitHub repository]
 
 This testbed supported the MSc thesis **Transformer-Based Intrusion Detection for 5G Core Networks** by Yathusan Thulasinathan. The research used a Kubernetes-deployed Free5GC and UERANSIM environment to collect benign and malicious network traffic and evaluate BERT, DistilBERT, RoBERTa, and ALBERT as intrusion-detection models.
 
-[Read the MSc thesis](research/Transformer-Based-Intrusion-Detection-for-5G-Core-Networks.pdf)
+[Read the MSc thesis in Brock University's Digital Repository](https://hdl.handle.net/10464/19789)
 
 ## Directory Structure
 
